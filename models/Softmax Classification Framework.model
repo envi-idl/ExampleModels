@@ -1,0 +1,299 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "envitask": {
+                "static_input": {
+                    "maximum_iterations": 600,
+                    "convergence_criterion": 9.9999999999999995e-007,
+                    "learning_rate": 100.00000000000000
+                },
+                "revision": "1.0.0",
+                "name": "CreateGradientDescentTrainer"
+            },
+            "name": "task_1",
+            "location": [1966, 1430],
+            "display_name": "Create a Gradient Descent Trainer",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "ExtractExamplesFromRaster",
+                "revision": "1.0.0"
+            },
+            "name": "task_2",
+            "location": [1442, 1695],
+            "display_name": "Extract Examples from Raster",
+            "type": "task"
+        },
+        {
+            "name": "propertyExtractor_1",
+            "location": [1800, 1509],
+            "display_name": "Extract Properties and Metadata",
+            "type": "propertyextractor",
+            "revision": "1.0.0"
+        },
+        {
+            "envitask": {
+                "name": "CreateSoftmaxRegressionClassifier",
+                "revision": "1.0.0"
+            },
+            "name": "task_3",
+            "location": [1964, 1509],
+            "display_name": "Create a Softmax Regression Classifier",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "TrainClassifier",
+                "revision": "1.0.0"
+            },
+            "name": "task_4",
+            "location": [2131, 1701],
+            "display_name": "Train Classifier",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "ClassifyRaster",
+                "revision": "1.0.0"
+            },
+            "name": "task_5",
+            "location": [2358, 1747],
+            "display_name": "Classify Raster",
+            "type": "task"
+        },
+        {
+            "name": "view_1",
+            "location": [1427, 1803],
+            "display_name": "View",
+            "type": "view",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "comment_1",
+            "location": [1328, 1543],
+            "display_name": "Step 1: Extract training data from your raster with an ENVIRaster and ENVIROI Array",
+            "type": "comment"
+        },
+        {
+            "envitask": {
+                "name": "ShuffleExamples",
+                "revision": "1.0.0"
+            },
+            "name": "task_6",
+            "location": [1642, 1815],
+            "display_name": "Shuffle Examples and Class Values",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "SplitExamples",
+                "revision": "1.0.0"
+            },
+            "name": "task_7",
+            "location": [1797, 1815],
+            "display_name": "Split Examples and Class Values",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "indices": [0]
+                },
+                "revision": "1.0.0",
+                "name": "ExtractElementFromArray"
+            },
+            "name": "elementExtractor_1",
+            "location": [1949, 1815],
+            "display_name": "Extract Elements from Array",
+            "type": "arrayextractor",
+            "indices": [0]
+        },
+        {
+            "envitask": {
+                "name": "CalculateConfusionMatrixFromRaster",
+                "revision": "1.0.0"
+            },
+            "name": "task_8",
+            "location": [2536, 1644],
+            "display_name": "Calculate Confusion Matrix from Raster",
+            "type": "task"
+        },
+        {
+            "name": "comment_2",
+            "location": [1797, 1916],
+            "display_name": "Step 2: prepare our samples by shuffling and only using a fraction of our training data to create the classifier",
+            "type": "comment"
+        },
+        {
+            "name": "comment_3",
+            "location": [1777, 1426],
+            "display_name": "Step 3: initialize the softmax classifier and the trainer to train the classifier on our data.",
+            "type": "comment"
+        },
+        {
+            "name": "comment_4",
+            "location": [898, 1712],
+            "display_name": "TIP: Important note here with softmax. Every pixel has to have a classification in the results, this means that you should have an \"unclassified\" ROi that contains pixels that you are not intersted in at all.",
+            "type": "comment"
+        },
+        {
+            "name": "comment_5",
+            "location": [2129, 1781],
+            "display_name": "Step 4: Train the classifier",
+            "type": "comment"
+        },
+        {
+            "name": "comment_6",
+            "location": [2436, 1839],
+            "display_name": "Step 5: Classify the raster and evaluate the classifier by generating a confusion matrix",
+            "type": "comment"
+        },
+        {
+            "name": "raster_1",
+            "location": [1059, 1743],
+            "display_name": "qb_boulder_msi",
+            "uris": ["C:\\Program Files\\Harris\\ENVI55\\data\\qb_boulder_msi"],
+            "type": "rasterfile"
+        },
+        {
+            "name": "roi_1",
+            "location": [1068, 1639],
+            "display_name": "qb_boulder_roi.xml",
+            "uris": ["C:\\Program Files\\Harris\\ENVI55\\data\\qb_boulder_roi.xml"],
+            "type": "roifile"
+        },
+        {
+            "name": "comment_7",
+            "location": [2566, 1550],
+            "display_name": "Confusion matrix information can only be accessed from IDL. See this example: http://www.harrisgeospatial.com/docs/programmingguideclassification_codeexamplesoftmaxtasks.html ",
+            "type": "comment"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "gain": [0.00024414062500000000, 0.00024414062500000000, 0.00024414062500000000, 0.00024414062500000000],
+                    "offset": [0.00000000000000000, 0.00000000000000000, 0.00000000000000000, 0.00000000000000000]
+                },
+                "revision": "1.1.0",
+                "name": "ApplyGainOffset"
+            },
+            "name": "task_9",
+            "location": [1247, 1744],
+            "display_name": "Apply Gain and Offset",
+            "type": "task"
+        },
+        {
+            "name": "view_2",
+            "location": [2673, 1749],
+            "display_name": "View",
+            "type": "view",
+            "revision": "1.0.0"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_examples"],
+            "to_node": "propertyExtractor_1",
+            "to_parameters": ["input_object"]
+        },
+        {
+            "from_node": "propertyExtractor_1",
+            "from_parameters": ["nattributes", "nclasses", "class_names"],
+            "to_node": "task_3",
+            "to_parameters": ["nattributes", "nclasses", "class_names"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_trainer"],
+            "to_node": "task_4",
+            "to_parameters": ["trainer"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_classifier"],
+            "to_node": "task_4",
+            "to_parameters": ["classifier"]
+        },
+        {
+            "from_node": "task_4",
+            "from_parameters": ["trained_classifier"],
+            "to_node": "task_5",
+            "to_parameters": ["classifier"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_examples"],
+            "to_node": "task_6",
+            "to_parameters": ["input_examples"]
+        },
+        {
+            "from_node": "task_6",
+            "from_parameters": ["output_examples"],
+            "to_node": "task_7",
+            "to_parameters": ["input_examples"]
+        },
+        {
+            "from_node": "task_7",
+            "from_parameters": ["output_examples"],
+            "to_node": "elementExtractor_1",
+            "to_parameters": ["input_array"]
+        },
+        {
+            "from_node": "elementExtractor_1",
+            "from_parameters": ["output_element"],
+            "to_node": "task_4",
+            "to_parameters": ["examples"]
+        },
+        {
+            "from_node": "task_5",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_8",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "roi_1",
+            "from_parameters": [""],
+            "to_node": "task_2",
+            "to_parameters": ["input_rois"]
+        },
+        {
+            "from_node": "roi_1",
+            "from_parameters": [""],
+            "to_node": "task_8",
+            "to_parameters": ["input_rois"]
+        },
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "task_9",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_9",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_2",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_9",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_5",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_9",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_5",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_2",
+            "to_parameters": ["input_raster"]
+        }
+    ]
+}

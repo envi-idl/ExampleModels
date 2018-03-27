@@ -1,0 +1,325 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "name": "iterator_1",
+            "location": [1466, 1439],
+            "display_name": "Iterator",
+            "type": "iterator"
+        },
+        {
+            "envitask": {
+                "name": "ExtractBandsFromRaster",
+                "revision": "Unknown"
+            },
+            "name": "task_1",
+            "location": [1323, 1439],
+            "display_name": "Extract Bands from Raster",
+            "type": "task"
+        },
+        {
+            "name": "raster_1",
+            "location": [1148, 1492],
+            "display_name": "qb_boulder_msi",
+            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_msi"],
+            "type": "rasterfile"
+        },
+        {
+            "name": "view_1",
+            "location": [1746, 1298],
+            "display_name": "View",
+            "type": "view"
+        },
+        {
+            "envitask": {
+                "name": {
+                    "name": "ANONYMOUS_META",
+                    "base_class": "ENVIMETATASK",
+                    "display_name": "Anonymous META Task",
+                    "description": "This is an ENVI Metatask",
+                    "schema": "envitask_3.1",
+                    "commute_on_downsample": "Unknown",
+                    "commute_on_subset": "Unknown",
+                    "parameters": [
+                        {
+                            "name": "INPUT_RASTER1",
+                            "display_name": "Input Raster 1",
+                            "type": "ENVIRASTER",
+                            "direction": "INPUT",
+                            "required": true,
+                            "description": "Specify a single-band raster on which to perform an image difference of input band.",
+                            "hidden": false,
+                            "allow_null": false
+                        },
+                        {
+                            "name": "INPUT_RASTER",
+                            "display_name": "Input Raster",
+                            "type": "ENVIRASTER",
+                            "direction": "INPUT",
+                            "required": true,
+                            "description": "Specify the input raster.",
+                            "hidden": false,
+                            "allow_null": false
+                        },
+                        {
+                            "name": "DAG",
+                            "type": "ENVIMETATASKDAG",
+                            "direction": "INPUT",
+                            "required": true,
+                            "description": "This is the graph that describes the metatask.",
+                            "hidden": true,
+                            "default": {
+                                "task_2": {
+                                    "name": "ExtractBandsFromRaster",
+                                    "external_input": {
+                                        "input_raster": "INPUT_RASTER"
+                                    },
+                                    "internal_input": {
+                                    },
+                                    "static_input": {
+                                    },
+                                    "output": {
+                                    }
+                                },
+                                "iterator_1": {
+                                    "name": {
+                                        "base_class": "ENVITASKFROMPROCEDURE",
+                                        "schema": "envitask_3.0",
+                                        "commute_on_downsample": "Unknown",
+                                        "commute_on_subset": "Unknown",
+                                        "routine": "ENVIUnrollMetatask",
+                                        "parameters": [
+                                            {
+                                                "name": "INPUT_METATASK",
+                                                "display_name": "Input Metatask",
+                                                "type": "ENVIMETATASK",
+                                                "direction": "INPUT",
+                                                "required": true,
+                                                "description": "Specify the metatask to unroll.",
+                                                "hidden": false
+                                            },
+                                            {
+                                                "name": "ITERATE_VALUES",
+                                                "display_name": "Parameter Values",
+                                                "type": "ENVIRASTERARRAY",
+                                                "direction": "INPUT",
+                                                "required": true,
+                                                "description": "Specify the array of values to iterate over.",
+                                                "hidden": false,
+                                                "dimensions": "[*]"
+                                            },
+                                            {
+                                                "name": "OUTPUT_METATASK",
+                                                "display_name": "Output Metatask",
+                                                "type": "ENVIMETATASK",
+                                                "direction": "OUTPUT",
+                                                "required": true,
+                                                "description": "Returns the output unrolled metatask.",
+                                                "hidden": false
+                                            },
+                                            {
+                                                "name": "EXTERNAL_PARAMETER_0",
+                                                "display_name": "Input Raster 1",
+                                                "type": "ENVIRASTER",
+                                                "direction": "INPUT",
+                                                "required": true,
+                                                "description": "Specify a single-band raster on which to perform an image difference of input band.",
+                                                "hidden": false
+                                            },
+                                            {
+                                                "name": "EXTERNAL_PARAMETER_1",
+                                                "display_name": "Output Raster",
+                                                "type": "ENVIRASTERARRAY",
+                                                "direction": "OUTPUT",
+                                                "required": true,
+                                                "description": "This is a reference to the output raster of filetype ENVI.",
+                                                "hidden": false,
+                                                "dimensions": "[*]"
+                                            }
+                                        ]
+                                    },
+                                    "external_input": {
+                                        "EXTERNAL_PARAMETER_0": "INPUT_RASTER1"
+                                    },
+                                    "internal_input": {
+                                        "iterate_values": "task_2.output_rasters"
+                                    },
+                                    "static_input": {
+                                        "input_metatask": {
+                                            "base_class": "ENVIMETATASK",
+                                            "display_name": "Untitled",
+                                            "description": "This is an ENVI Metatask",
+                                            "schema": "envitask_3.0",
+                                            "commute_on_downsample": "Unknown",
+                                            "commute_on_subset": "Unknown",
+                                            "parameters": [
+                                                {
+                                                    "name": "DAG",
+                                                    "type": "ENVIMETATASKDAG",
+                                                    "direction": "INPUT",
+                                                    "required": true,
+                                                    "description": "This is the graph that describes the metatask.",
+                                                    "hidden": true,
+                                                    "default": {
+                                                        "task_1": {
+                                                            "name": "ImageBandDifference",
+                                                            "external_input": {
+                                                                "input_raster1": "EXTERNAL_PARAMETER_0",
+                                                                "input_raster2": "ITERATE_VALUES"
+                                                            },
+                                                            "internal_input": {
+                                                            },
+                                                            "static_input": {
+                                                            },
+                                                            "output": {
+                                                            }
+                                                        },
+                                                        "aggregator_1": {
+                                                            "name": {
+                                                                "base_class": "ENVIINPUTTOLISTTASK",
+                                                                "display_name": "Aggregator",
+                                                                "description": "This task takes in an unspecified number of input parameters and an output parameter that is the aggregation of the inputs.",
+                                                                "schema": "envitask_3.0",
+                                                                "commute_on_downsample": "Unknown",
+                                                                "commute_on_subset": "Unknown",
+                                                                "parameters": [
+                                                                    {
+                                                                        "name": "Extract",
+                                                                        "type": "BOOLEAN",
+                                                                        "direction": "INPUT",
+                                                                        "required": false,
+                                                                        "description": "Specify the value of the EXTRACT keyword used when calling List::Add() on each input.  If this is false (the default), the array inputs are added to the output list as a single list element.  If this is true, each element of array inputs is added to the output list separately, resulting in a list of scalar values.",
+                                                                        "hidden": false,
+                                                                        "default": false,
+                                                                        "value": true,
+                                                                        "allow_cast": true,
+                                                                        "allow_string": true
+                                                                    },
+                                                                    {
+                                                                        "name": "Output",
+                                                                        "type": "LIST",
+                                                                        "direction": "OUTPUT",
+                                                                        "required": true,
+                                                                        "description": "List containing all input parameters added in order.",
+                                                                        "hidden": false
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "external_input": {
+                                                            },
+                                                            "internal_input": {
+                                                                "input0": "task_1.output_raster"
+                                                            },
+                                                            "static_input": {
+                                                            },
+                                                            "output": {
+                                                                "output": "EXTERNAL_PARAMETER_1"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "output": {
+                                        "EXTERNAL_PARAMETER_1": "output_raster"
+                                    }
+                                }
+                            },
+                            "allow_null": false
+                        },
+                        {
+                            "name": "OUTPUT_RASTER",
+                            "display_name": "Output Raster",
+                            "type": "ENVIRASTERARRAY",
+                            "direction": "OUTPUT",
+                            "required": true,
+                            "description": "This is a reference to the output raster of filetype ENVI.",
+                            "hidden": false,
+                            "allow_null": false,
+                            "dimensions": "[*]"
+                        }
+                    ]
+                },
+                "revision": "Unknown"
+            },
+            "name": "task_2",
+            "location": [1625, 1492],
+            "display_name": "Nested Loops - Inner Loop",
+            "type": "anonymoustask"
+        },
+        {
+            "name": "aggregator_1",
+            "location": [1479, 1298],
+            "display_name": "Aggregator",
+            "extract": 1,
+            "type": "aggregator"
+        },
+        {
+            "name": "comment_1",
+            "location": [1216, 1269],
+            "display_name": "Comparing all the bands in a raster file against themselves. This requires nested looping, an advanced feature that is achieved using metatasks.",
+            "type": "comment"
+        },
+        {
+            "name": "comment_2",
+            "location": [1626, 1572],
+            "display_name": "If you want to crack open this metatask, open the \"Nested Loops Example - Inner Loop.model\" file",
+            "type": "comment"
+        },
+        {
+            "envitask": {
+                "name": "BuildRasterSeries",
+                "revision": "Unknown"
+            },
+            "name": "task_3",
+            "location": [1615, 1298],
+            "display_name": "Build Raster Series",
+            "type": "task"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_rasters"],
+            "to_node": "iterator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "iterator_1",
+            "from_parameters": [""],
+            "to_node": "task_2",
+            "to_parameters": ["input_raster1"]
+        },
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "task_2",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_raster"],
+            "to_node": "aggregator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "aggregator_1",
+            "from_parameters": ["output"],
+            "to_node": "task_3",
+            "to_parameters": ["input_rasters"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_rasterseries"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster_series"]
+        }
+    ]
+}

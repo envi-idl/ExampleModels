@@ -1,0 +1,210 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "name": "parameters_1",
+            "location": [1268, 1495],
+            "display_name": "Input Parameters",
+            "type": "inputparameters",
+            "parameters": [
+                {
+                    "name": "INPUT_RASTER",
+                    "type": "ENVIRASTER",
+                    "display_name": "Input Raster"
+                },
+                {
+                    "name": "INPUT_RASTER_1",
+                    "type": "ENVIRASTER",
+                    "display_name": "Input Raster"
+                },
+                {
+                    "name": "INDEX",
+                    "type": "STRING",
+                    "display_name": "Index"
+                },
+                {
+                    "name": "CHANGE_TYPE",
+                    "type": "STRING",
+                    "display_name": "Change Type"
+                },
+                {
+                    "name": "OUTPUT_RASTER_URI",
+                    "type": "ENVIURI",
+                    "display_name": "Output Raster URI"
+                }
+            ]
+        },
+        {
+            "name": "parameters_2",
+            "location": [2588, 1705],
+            "display_name": "Output Parameters",
+            "type": "outputparameters"
+        },
+        {
+            "envitask": {
+                "name": "BuildGridDefinitionFromRaster",
+                "revision": "1.0.0"
+            },
+            "name": "task_1",
+            "location": [1433, 1705],
+            "display_name": "Build Grid Definition from Raster",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "RegridRaster",
+                "revision": "1.1.0"
+            },
+            "name": "task_2",
+            "location": [1598, 1705],
+            "display_name": "Regrid Raster",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "SpectralIndex",
+                "revision": "1.1.0"
+            },
+            "name": "task_3",
+            "location": [1763, 1705],
+            "display_name": "Spectral Index",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "SpectralIndex",
+                "revision": "1.1.0"
+            },
+            "name": "task_4",
+            "location": [1433, 1453],
+            "display_name": "Spectral Index",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "ImageBandDifference",
+                "revision": "1.0.0"
+            },
+            "name": "task_5",
+            "location": [1928, 1705],
+            "display_name": "Image Band Difference",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "AutoChangeThresholdClassification",
+                "revision": "1.0.0"
+            },
+            "name": "task_6",
+            "location": [2093, 1705],
+            "display_name": "Automatic Change Threshold Classification",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "ClassificationSmoothing",
+                "revision": "1.0.0"
+            },
+            "name": "task_7",
+            "location": [2258, 1705],
+            "display_name": "Classification Smoothing",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "ClassificationAggregation",
+                "revision": "1.1.0"
+            },
+            "name": "task_8",
+            "location": [2423, 1705],
+            "display_name": "Classification Aggregation",
+            "type": "task"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["input_raster"],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_griddefinition"],
+            "to_node": "task_2",
+            "to_parameters": ["grid_definition"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["input_raster_1"],
+            "to_node": "task_2",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_3",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["index"],
+            "to_node": "task_3",
+            "to_parameters": ["index"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["input_raster", "index"],
+            "to_node": "task_4",
+            "to_parameters": ["input_raster", "index"]
+        },
+        {
+            "from_node": "task_4",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_5",
+            "to_parameters": ["input_raster1"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_5",
+            "to_parameters": ["input_raster2"]
+        },
+        {
+            "from_node": "task_5",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_6",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["change_type"],
+            "to_node": "task_6",
+            "to_parameters": ["change_type"]
+        },
+        {
+            "from_node": "task_6",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_7",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_7",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_8",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["output_raster_uri"],
+            "to_node": "task_8",
+            "to_parameters": ["output_raster_uri"]
+        },
+        {
+            "from_node": "task_8",
+            "from_parameters": ["output_raster"],
+            "to_node": "parameters_2",
+            "to_parameters": ["output_raster"]
+        }
+    ]
+}

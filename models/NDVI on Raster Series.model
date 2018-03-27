@@ -1,0 +1,99 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "name": "rasterSeries_1",
+            "location": [1553, 1634],
+            "display_name": "landsat_subset.series",
+            "type": "envirasterseries",
+            "datasets": [
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\time_series\\landsat_subset\\landsat_subset.series",
+                    "factory": "URLRasterSeries"
+                }
+            ]
+        },
+        {
+            "envitask": {
+                "name": "ExtractRastersFromRasterSeries",
+                "revision": "1.0.0"
+            },
+            "name": "task_1",
+            "location": [1718, 1634],
+            "display_name": "Extract Rasters from Raster Series",
+            "type": "task"
+        },
+        {
+            "name": "iterator_1",
+            "location": [1883, 1634],
+            "display_name": "Iterator",
+            "type": "iterator",
+            "revision": "1.0.0"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "index": "NDVI"
+                },
+                "revision": "1.0.0",
+                "name": "SpectralIndex"
+            },
+            "name": "task_2",
+            "location": [2048, 1634],
+            "display_name": "Spectral Index",
+            "type": "task"
+        },
+        {
+            "name": "view_1",
+            "location": [2213, 1592],
+            "display_name": "View",
+            "type": "view",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "dataManager_1",
+            "location": [2213, 1676],
+            "display_name": "Data Manager",
+            "type": "datamanager",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "comment_1",
+            "location": [1879, 1488],
+            "display_name": "Example of how to iterate over a Raster Series file, performing a task on every single raster on the series. Notice the need for a \"Extract Rasters from Raster Series\" node.",
+            "type": "comment"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "rasterSeries_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster_series"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_rasters"],
+            "to_node": "iterator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "iterator_1",
+            "from_parameters": [""],
+            "to_node": "task_2",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_raster"],
+            "to_node": "dataManager_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        }
+    ]
+}

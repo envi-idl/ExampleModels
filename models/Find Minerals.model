@@ -1,0 +1,158 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "name": "raster_1",
+            "location": [1385, 1521],
+            "display_name": "cup95eff.int",
+            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\envi_data_dir\\cup95eff.int"],
+            "type": "rasterfile"
+        },
+        {
+            "envitask": {
+                "name": "GetSpectrumFromLibrary",
+                "revision": "Unknown"
+            },
+            "name": "task_1",
+            "location": [1687, 1349],
+            "display_name": "Get Spectrum from Library",
+            "type": "task"
+        },
+        {
+            "name": "spectrallib_1",
+            "location": [1386, 1292],
+            "display_name": "usgs_min.sli",
+            "uris": ["\\\\fridge.rsinc.com\\envi_data\\data_dvd\\spec_lib\\usgs_min\\usgs_min.sli"],
+            "type": "spectrallibraryfile"
+        },
+        {
+            "envitask": {
+                "name": "ResampleSpectrum",
+                "revision": "Unknown"
+            },
+            "name": "task_2",
+            "location": [1854, 1401],
+            "display_name": "Resample Spectrum",
+            "type": "task"
+        },
+        {
+            "name": "propertyExtractor_1",
+            "location": [1620, 1476],
+            "display_name": "Extract Properties and Metadata",
+            "type": "propertyextractor"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "threshold_angle": [0.10000000149011612]
+                },
+                "revision": "Unknown",
+                "name": "SpectralAngleMapperClassification"
+            },
+            "name": "task_3",
+            "location": [2017, 1518],
+            "display_name": "Spectral Angle Mapper Classification",
+            "type": "task"
+        },
+        {
+            "name": "view_1",
+            "location": [2159, 1562],
+            "display_name": "View",
+            "type": "view"
+        },
+        {
+            "name": "values_1",
+            "location": [1384, 1396],
+            "display_name": "Alunite, Kaolinite",
+            "value": ["alunite1.spc Alunite GDS84 Na03", "kaolini1.spc Kaolinite CM9"],
+            "type": "arrayvalues",
+            "data_type": "String"
+        },
+        {
+            "name": "dataManager_1",
+            "location": [2159, 1478],
+            "display_name": "Data Manager",
+            "type": "datamanager"
+        },
+        {
+            "name": "comment_1",
+            "location": [1735, 1571],
+            "display_name": "Mapping minerals in a hyperspectral image. Selected materials only.",
+            "type": "comment"
+        },
+        {
+            "name": "iterator_1",
+            "location": [1537, 1395],
+            "display_name": "Iterator",
+            "type": "iterator"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "spectrallib_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_spectral_library"]
+        },
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "propertyExtractor_1",
+            "to_parameters": ["input_object"]
+        },
+        {
+            "from_node": "propertyExtractor_1",
+            "from_parameters": ["wavelength", "wavelength_units"],
+            "to_node": "task_2",
+            "to_parameters": ["resample_wavelengths", "resample_wavelength_units"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["spectrum", "wavelengths", "wavelength_units"],
+            "to_node": "task_2",
+            "to_parameters": ["input_spectrum", "input_wavelengths", "input_wavelength_units"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_spectrum"],
+            "to_node": "task_3",
+            "to_parameters": ["mean"]
+        },
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "task_3",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "values_1",
+            "from_parameters": [""],
+            "to_node": "iterator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "iterator_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["spectrum_name"]
+        },
+        {
+            "from_node": "iterator_1",
+            "from_parameters": [""],
+            "to_node": "task_3",
+            "to_parameters": ["class_names"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "dataManager_1",
+            "to_parameters": ["input_raster"]
+        }
+    ]
+}

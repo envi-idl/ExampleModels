@@ -1,0 +1,196 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "name": "iterator_1",
+            "location": [1366, 1671],
+            "display_name": "Iterator",
+            "type": "iterator",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "parameters_1",
+            "location": [1201, 1587],
+            "display_name": "Input Parameters",
+            "type": "inputparameters",
+            "parameters": [
+                {
+                    "name": "INPUT_RASTER",
+                    "type": "ENVIRASTERARRAY",
+                    "display_name": "Input Raster"
+                },
+                {
+                    "name": "RESAMPLING",
+                    "type": "STRING",
+                    "display_name": "Resampling Method"
+                }
+            ]
+        },
+        {
+            "envitask": {
+                "name": "RegridRaster",
+                "revision": "1.0.0"
+            },
+            "name": "task_1",
+            "location": [1520, 1587],
+            "display_name": "Regrid Raster",
+            "type": "task"
+        },
+        {
+            "name": "aggregator_1",
+            "location": [1685, 1587],
+            "display_name": "Aggregator",
+            "extract": 1,
+            "type": "aggregator",
+            "revision": "1.0.0"
+        },
+        {
+            "envitask": {
+                "name": "BuildBandStack",
+                "revision": "1.0.0"
+            },
+            "name": "task_2",
+            "location": [1850, 1587],
+            "display_name": "Build Band Stack",
+            "type": "task"
+        },
+        {
+            "name": "view_1",
+            "location": [2015, 1629],
+            "display_name": "View",
+            "type": "view",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "dataManager_1",
+            "location": [2015, 1545],
+            "display_name": "Data Manager",
+            "type": "datamanager",
+            "revision": "1.0.0"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "indices": [0]
+                },
+                "revision": "1.0.0",
+                "name": "ExtractElementFromArray"
+            },
+            "name": "elementExtractor_1",
+            "location": [1366, 1461],
+            "display_name": "Extract Elements from Array",
+            "type": "arrayextractor",
+            "indices": [0]
+        },
+        {
+            "envitask": {
+                "name": "BuildGridDefinitionFromRaster",
+                "revision": "1.0.0"
+            },
+            "name": "task_3",
+            "location": [1531, 1461],
+            "display_name": "Build Grid Definition from Raster",
+            "type": "task"
+        },
+        {
+            "name": "comment_1",
+            "location": [1513, 1725],
+            "display_name": "Stacks a number of rasters together in a single multi-band raster, using the grid definition defined by the first raster on the list.",
+            "type": "comment"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "extension": ".dat",
+                    "prefix": "RasterStacking_output_raster"
+                },
+                "revision": "1.0.0",
+                "name": "GenerateFilename"
+            },
+            "name": "task_4",
+            "location": [1683, 1672],
+            "display_name": "Generate Filename",
+            "type": "task"
+        },
+        {
+            "name": "comment_2",
+            "location": [1759, 1472],
+            "display_name": "YES, it works even if the rasters have different numbers of columns/rows or pixel size. But they all need to be georereferenced.",
+            "type": "comment"
+        },
+        {
+            "name": "comment_3",
+            "location": [1835, 1767],
+            "display_name": "Note: ENVI 5.5 is going to have a task called BUILD LAYER STACK that will do exactly what this model does, but by wrapping a virtual raster.",
+            "type": "comment"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "iterator_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["input_raster"],
+            "to_node": "iterator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["resampling"],
+            "to_node": "task_1",
+            "to_parameters": ["resampling"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_raster"],
+            "to_node": "aggregator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "aggregator_1",
+            "from_parameters": ["output"],
+            "to_node": "task_2",
+            "to_parameters": ["input_rasters"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_raster"],
+            "to_node": "dataManager_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["input_raster"],
+            "to_node": "elementExtractor_1",
+            "to_parameters": ["input_array"]
+        },
+        {
+            "from_node": "elementExtractor_1",
+            "from_parameters": ["output_element"],
+            "to_node": "task_3",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_griddefinition"],
+            "to_node": "task_1",
+            "to_parameters": ["grid_definition"]
+        },
+        {
+            "from_node": "task_4",
+            "from_parameters": ["output_filename"],
+            "to_node": "task_2",
+            "to_parameters": ["output_raster_uri"]
+        }
+    ]
+}

@@ -1,0 +1,118 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "envitask": {
+                "name": "ISODATAClassification",
+                "revision": "Unknown"
+            },
+            "name": "task_1",
+            "location": [1802, 2245],
+            "display_name": "ISODATA Classification",
+            "type": "task"
+        },
+        {
+            "name": "raster_1",
+            "location": [1339, 2365],
+            "display_name": "qb_boulder_msi",
+            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_msi"],
+            "type": "rasterfile"
+        },
+        {
+            "name": "values_1",
+            "location": [1266, 2259],
+            "display_name": "3, 6, 9",
+            "value": [3, 6, 9],
+            "type": "arrayvalues",
+            "data_type": "Unsigned Integer"
+        },
+        {
+            "name": "iterator_1",
+            "location": [1431, 2259],
+            "display_name": "Iterator",
+            "type": "iterator"
+        },
+        {
+            "name": "view_1",
+            "location": [1980, 2198],
+            "display_name": "View",
+            "type": "view"
+        },
+        {
+            "name": "dataManager_1",
+            "location": [1980, 2293],
+            "display_name": "Data Manager",
+            "type": "datamanager"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "random": false,
+                    "prefix": "Number of Classes "
+                },
+                "revision": "Unknown",
+                "name": "GenerateFilename"
+            },
+            "name": "task_2",
+            "location": [1593, 2185],
+            "display_name": "Generate Filename",
+            "type": "task"
+        },
+        {
+            "name": "comment_1",
+            "location": [1629, 2388],
+            "display_name": "Multiple isodata classification iterating over 3, 6, and 9 classes.",
+            "type": "comment"
+        },
+        {
+            "name": "comment_2",
+            "location": [1772, 2146],
+            "display_name": "If you want to run this multiple times, edit Generate Filename and set Append Random Number to YES.",
+            "type": "comment"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "values_1",
+            "from_parameters": [""],
+            "to_node": "iterator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "iterator_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["number_of_classes"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_raster"],
+            "to_node": "dataManager_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "iterator_1",
+            "from_parameters": [""],
+            "to_node": "task_2",
+            "to_parameters": ["number"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_filename"],
+            "to_node": "task_1",
+            "to_parameters": ["output_raster_uri"]
+        }
+    ]
+}

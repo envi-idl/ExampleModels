@@ -1,0 +1,256 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "name": "view_1",
+            "location": [1858, 1566],
+            "display_name": "View",
+            "type": "view"
+        },
+        {
+            "name": "raster_1",
+            "location": [1130, 1830],
+            "display_name": "lanai_dem1.tif",
+            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\sfe\\Hawaii_Landcover_46\\lanai\\lanai_dem1.tif"],
+            "type": "rasterfile"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "azimuth": 315.00000000000000,
+                    "elevation": 45.000000000000000,
+                    "products": ["Shaded Relief"]
+                },
+                "revision": "Unknown",
+                "name": "TopographicModeling"
+            },
+            "name": "task_1",
+            "location": [1295, 1781],
+            "display_name": "Topographic Modeling",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "color_table_name": "BLUE/GREEN/RED/YELLOW",
+                    "number_of_ranges": 255
+                },
+                "revision": "Unknown",
+                "name": "ColorSliceClassification"
+            },
+            "name": "task_2",
+            "location": [1295, 1878],
+            "display_name": "Color Slice Classification",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "ExportRasterToPNG",
+                "revision": "Unknown"
+            },
+            "name": "task_3",
+            "location": [1460, 1878],
+            "display_name": "Export to PNG",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "BuildBandStack",
+                "revision": "Unknown"
+            },
+            "name": "task_4",
+            "location": [1214, 1607],
+            "display_name": "Build Band Stack",
+            "type": "task"
+        },
+        {
+            "name": "aggregator_1",
+            "location": [1773, 1833],
+            "display_name": "Aggregator",
+            "extract": 1,
+            "type": "aggregator"
+        },
+        {
+            "envitask": {
+                "name": "ExtractBandsFromRaster",
+                "revision": "Unknown"
+            },
+            "name": "task_5",
+            "location": [1625, 1878],
+            "display_name": "Extract Bands from Raster",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "expression": "b1*b4"
+                },
+                "revision": "Unknown",
+                "name": "PixelwiseBandMathRaster"
+            },
+            "name": "task_6",
+            "location": [1406, 1671],
+            "display_name": "Band Math",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "expression": "b2*b4"
+                },
+                "revision": "Unknown",
+                "name": "PixelwiseBandMathRaster"
+            },
+            "name": "task_7",
+            "location": [1407, 1606],
+            "display_name": "Band Math",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "expression": "b3*b4"
+                },
+                "revision": "Unknown",
+                "name": "PixelwiseBandMathRaster"
+            },
+            "name": "task_8",
+            "location": [1408, 1542],
+            "display_name": "Band Math",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "BuildBandStack",
+                "revision": "Unknown"
+            },
+            "name": "task_9",
+            "location": [1718, 1606],
+            "display_name": "Build Band Stack",
+            "type": "task"
+        },
+        {
+            "name": "aggregator_2",
+            "location": [1577, 1606],
+            "display_name": "Aggregator",
+            "extract": 1,
+            "type": "aggregator"
+        },
+        {
+            "name": "comment_1",
+            "location": [1114, 1931],
+            "display_name": "This model takes a DEM and creates an image where color show elevation and shading represents terrain shape.",
+            "type": "comment"
+        },
+        {
+            "name": "comment_2",
+            "location": [1461, 1949],
+            "display_name": "Export to PNG is the trick to create a 3-band RGB from an indexed-color image",
+            "type": "comment"
+        },
+        {
+            "name": "dataManager_1",
+            "location": [1858, 1645],
+            "display_name": "Data Manager",
+            "type": "datamanager"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "task_2",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_3",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_5",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_5",
+            "from_parameters": ["output_rasters"],
+            "to_node": "aggregator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_raster"],
+            "to_node": "aggregator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "aggregator_1",
+            "from_parameters": ["output"],
+            "to_node": "task_4",
+            "to_parameters": ["input_rasters"]
+        },
+        {
+            "from_node": "task_4",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_6",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_4",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_7",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_4",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_8",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "aggregator_2",
+            "from_parameters": ["output"],
+            "to_node": "task_9",
+            "to_parameters": ["input_rasters"]
+        },
+        {
+            "from_node": "task_6",
+            "from_parameters": ["output_raster"],
+            "to_node": "aggregator_2",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "task_7",
+            "from_parameters": ["output_raster"],
+            "to_node": "aggregator_2",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "task_8",
+            "from_parameters": ["output_raster"],
+            "to_node": "aggregator_2",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "task_9",
+            "from_parameters": ["output_raster"],
+            "to_node": "dataManager_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_9",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        }
+    ]
+}

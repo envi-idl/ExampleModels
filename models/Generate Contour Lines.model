@@ -1,0 +1,100 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "name": "parameters_1",
+            "location": [1291, 1625],
+            "display_name": "Input Parameters",
+            "type": "inputparameters",
+            "parameters": [
+                {
+                    "name": "INPUT_RASTER",
+                    "type": "ENVIRASTER",
+                    "display_name": "Input Raster"
+                },
+                {
+                    "name": "NUMBER_OF_CLASSES",
+                    "type": "UINT",
+                    "display_name": "Number of Lines"
+                },
+                {
+                    "name": "KERNEL_SIZE",
+                    "type": "UINT",
+                    "display_name": "Kernel Size"
+                }
+            ]
+        },
+        {
+            "name": "parameters_2",
+            "location": [1951, 1667],
+            "display_name": "Output Parameters",
+            "type": "outputparameters"
+        },
+        {
+            "envitask": {
+                "name": "ISODATAClassification",
+                "revision": "1.0.0"
+            },
+            "name": "task_1",
+            "location": [1456, 1667],
+            "display_name": "ISODATA Classification",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "ClassificationSmoothing",
+                "revision": "1.0.0"
+            },
+            "name": "task_2",
+            "location": [1621, 1667],
+            "display_name": "Classification Smoothing",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "export_class_clrs": false,
+                    "export_area": false
+                },
+                "revision": "1.0.0",
+                "name": "ClassificationToShapefile"
+            },
+            "name": "task_3",
+            "location": [1786, 1667],
+            "display_name": "Convert Classification to Vector Shapefile",
+            "type": "task"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["input_raster", "number_of_classes"],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster", "number_of_classes"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_2",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["kernel_size"],
+            "to_node": "task_2",
+            "to_parameters": ["kernel_size"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_3",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_vector"],
+            "to_node": "parameters_2",
+            "to_parameters": ["output_vector"]
+        }
+    ]
+}

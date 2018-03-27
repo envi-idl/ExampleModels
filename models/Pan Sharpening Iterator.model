@@ -1,0 +1,97 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "name": "raster_1",
+            "location": [1335, 1555],
+            "display_name": "Low Res. Rasters",
+            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_msi", "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_msi"],
+            "type": "rasterfile"
+        },
+        {
+            "name": "raster_2",
+            "location": [1336, 1435],
+            "display_name": "High Res. Rasters",
+            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_pan", "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_pan"],
+            "type": "rasterfile"
+        },
+        {
+            "name": "iterator_1",
+            "location": [1517, 1576],
+            "display_name": "Iterator",
+            "type": "iterator",
+            "revision": "1.0.0"
+        },
+        {
+            "envitask": {
+                "name": "NNDiffusePanSharpening",
+                "revision": "1.0.0"
+            },
+            "name": "task_1",
+            "location": [1820, 1535],
+            "display_name": "NNDiffuse Pan Sharpening",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "ExtractElementFromArray",
+                "revision": "1.0.0"
+            },
+            "name": "elementExtractor_1",
+            "location": [1657, 1462],
+            "display_name": "Extract Elements from Array",
+            "type": "arrayextractor"
+        },
+        {
+            "name": "view_1",
+            "location": [1989, 1529],
+            "display_name": "View",
+            "type": "view",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "comment_1",
+            "location": [1681, 1667],
+            "display_name": "Example on how to iterate through two arrays of rasters in sync. We iterate through one of the sets, and use the iterator's index to extract the corresponding element from the second set.",
+            "type": "comment"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "iterator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "iterator_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_low_resolution_raster"]
+        },
+        {
+            "from_node": "iterator_1",
+            "from_parameters": ["index"],
+            "to_node": "elementExtractor_1",
+            "to_parameters": ["indices"]
+        },
+        {
+            "from_node": "raster_2",
+            "from_parameters": [""],
+            "to_node": "elementExtractor_1",
+            "to_parameters": ["input_array"]
+        },
+        {
+            "from_node": "elementExtractor_1",
+            "from_parameters": ["output_element"],
+            "to_node": "task_1",
+            "to_parameters": ["input_high_resolution_raster"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        }
+    ]
+}

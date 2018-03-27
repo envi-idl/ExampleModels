@@ -1,0 +1,197 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "name": "roi_1",
+            "location": [1629, 1650],
+            "display_name": "3 ROIs",
+            "uris": ["\\\\fridge.rsinc.com\\RSI_HOME\\eduardo\\Modeler\\Examples\\rois_ortho_VNIR2957.xml"],
+            "type": "roifile"
+        },
+        {
+            "name": "raster_1",
+            "location": [1629, 1524],
+            "display_name": "orthoVNIR2957",
+            "type": "enviraster",
+            "datasets": {
+                "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2957_flatfield.tif",
+                "factory": "URLRaster"
+            }
+        },
+        {
+            "envitask": {
+                "name": "ROIStatistics",
+                "revision": "1.0.0"
+            },
+            "name": "task_1",
+            "location": [1794, 1590],
+            "display_name": "ROI Training Classification Statistics",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "MahalanobisDistanceClassification",
+                "revision": "1.0.0"
+            },
+            "name": "task_2",
+            "location": [1959, 1524],
+            "display_name": "Mahalanobis Distance Classification",
+            "type": "task"
+        },
+        {
+            "name": "view_1",
+            "location": [2124, 1482],
+            "display_name": "View",
+            "type": "view",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "dataManager_1",
+            "location": [2124, 1566],
+            "display_name": "Data Manager",
+            "type": "datamanager",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "raster_2",
+            "location": [1631, 1426],
+            "display_name": "16 Rasters",
+            "type": "enviraster",
+            "datasets": [
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2604_flatfield.tif",
+                    "factory": "URLRaster",
+                    "auxiliary_url": [
+                        "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2604_flatfield.tif.enp"
+                    ]
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2603_flatfield.tif",
+                    "factory": "URLRaster",
+                    "auxiliary_url": [
+                        "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2603_flatfield.tif.enp"
+                    ]
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2958_flatfield.tif",
+                    "factory": "URLRaster",
+                    "auxiliary_url": [
+                        "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2958_flatfield.hdr"
+                    ]
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2957_flatfield.tif",
+                    "factory": "URLRaster"
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2956_flatfield.tif",
+                    "factory": "URLRaster"
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2955_flatfield.tif",
+                    "factory": "URLRaster"
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2904_flatfield.tif",
+                    "factory": "URLRaster"
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2903_flatfield.tif",
+                    "factory": "URLRaster"
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2902_flatfield.tif",
+                    "factory": "URLRaster"
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2901_flatfield.tif",
+                    "factory": "URLRaster"
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2702_flatfield.tif",
+                    "factory": "URLRaster"
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2701_flatfield.tif",
+                    "factory": "URLRaster"
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2700_flatfield.tif",
+                    "factory": "URLRaster",
+                    "auxiliary_url": [
+                        "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2700_flatfield.hdr"
+                    ]
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2699_flatfield.tif",
+                    "factory": "URLRaster"
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2606_flatfield.tif",
+                    "factory": "URLRaster"
+                },
+                {
+                    "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2605_flatfield.tif",
+                    "factory": "URLRaster"
+                }
+            ]
+        },
+        {
+            "name": "iterator_1",
+            "location": [1795, 1482],
+            "display_name": "Iterator",
+            "type": "iterator",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "comment_1",
+            "location": [1892, 1335],
+            "display_name": "Can we classify images based on ROIs created for a different raster? Yes, we can.",
+            "type": "comment"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "roi_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_roi"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["mean", "covariance", "roi_pixel_count", "roi_colors", "roi_names"],
+            "to_node": "task_2",
+            "to_parameters": ["mean", "covariance", "class_pixel_count", "class_colors", "class_names"]
+        },
+        {
+            "from_node": "raster_2",
+            "from_parameters": [""],
+            "to_node": "iterator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "iterator_1",
+            "from_parameters": [""],
+            "to_node": "task_2",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_raster"],
+            "to_node": "dataManager_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        }
+    ]
+}

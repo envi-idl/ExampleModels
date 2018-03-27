@@ -1,0 +1,129 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "name": "raster_1",
+            "location": [1380, 1634],
+            "display_name": "AVIRIS hyperspectral image",
+            "uris": ["\\\\fridge.rsinc.com\\envi_data\\aviris\\bakersfield_ca_reflectance\\AVIRISAgricultureScaledReflectance.dat"],
+            "type": "rasterfile"
+        },
+        {
+            "name": "spectrallib_1",
+            "location": [1380, 1518],
+            "display_name": "veg_2grn.sli",
+            "uris": ["\\\\fridge.rsinc.com\\envi_data\\data_dvd\\spec_lib\\veg_lib\\veg_2grn.sli"],
+            "type": "spectrallibraryfile"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "spectrum_name": "Dry Grass"
+                },
+                "revision": "Unknown",
+                "name": "GetSpectrumFromLibrary"
+            },
+            "name": "task_1",
+            "location": [1546, 1518],
+            "display_name": "Get Spectrum from Library",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "ResampleSpectrum",
+                "revision": "Unknown"
+            },
+            "name": "task_2",
+            "location": [1738, 1518],
+            "display_name": "Resample Spectrum",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "threshold": 0.59999999999999998
+                },
+                "revision": "Unknown",
+                "name": "SpectralAdaptiveCoherenceEstimatorUsingSubspaceBackgroundStatistics"
+            },
+            "name": "task_3",
+            "location": [1900, 1633],
+            "display_name": "Adaptive Coherence Estimator Using Subspace Background Statistics",
+            "type": "task"
+        },
+        {
+            "name": "dataManager_1",
+            "location": [2046, 1679],
+            "display_name": "Data Manager",
+            "type": "datamanager"
+        },
+        {
+            "name": "view_1",
+            "location": [2047, 1583],
+            "display_name": "View",
+            "type": "view"
+        },
+        {
+            "name": "comment_1",
+            "location": [1716, 1727],
+            "display_name": "This is a map of the McCaslin and US-36 interchange. Actually it runs ACE target detection analysis, using the mean and covariance from subspace background statistics. Brighter pixels represent a close match to the \"Dry Grass\" spectrum in the veg_2grn.sli spectral library. ",
+            "type": "comment"
+        },
+        {
+            "name": "propertyExtractor_1",
+            "location": [1546, 1589],
+            "display_name": "Extract Properties and Metadata",
+            "type": "propertyextractor"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "spectrallib_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_spectral_library"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["spectrum", "wavelengths", "wavelength_units"],
+            "to_node": "task_2",
+            "to_parameters": ["input_spectrum", "input_wavelengths", "input_wavelength_units"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_spectrum"],
+            "to_node": "task_3",
+            "to_parameters": ["spectra"]
+        },
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "task_3",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "propertyExtractor_1",
+            "to_parameters": ["input_object"]
+        },
+        {
+            "from_node": "propertyExtractor_1",
+            "from_parameters": ["wavelength", "wavelength_units"],
+            "to_node": "task_2",
+            "to_parameters": ["resample_wavelengths", "resample_wavelength_units"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "dataManager_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        }
+    ]
+}

@@ -1,0 +1,108 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "name": "comment_1",
+            "location": [1453, 1993],
+            "display_name": "Comparing all the bands in a raster file against themselves. This is the inner loop portion that is used as a metatask node in the outer loop.",
+            "type": "comment"
+        },
+        {
+            "envitask": {
+                "name": "ImageBandDifference",
+                "revision": "1.0.0"
+            },
+            "name": "task_1",
+            "location": [1576, 2226],
+            "display_name": "Image Band Difference",
+            "type": "task"
+        },
+        {
+            "name": "iterator_1",
+            "location": [1431, 2142],
+            "display_name": "Iterator",
+            "type": "iterator",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "parameters_1",
+            "location": [1150, 2224],
+            "display_name": "Input Parameters",
+            "type": "inputparameters",
+            "parameters": [
+                {
+                    "name": "INPUT_RASTER1",
+                    "type": "ENVIRASTER",
+                    "display_name": "Input Raster 1"
+                },
+                {
+                    "name": "INPUT_RASTER",
+                    "type": "ENVIRASTER",
+                    "display_name": "Input Raster 2"
+                }
+            ]
+        },
+        {
+            "envitask": {
+                "name": "ExtractBandsFromRaster",
+                "revision": "1.0.0"
+            },
+            "name": "task_2",
+            "location": [1286, 2142],
+            "display_name": "Extract Bands from Raster",
+            "type": "task"
+        },
+        {
+            "name": "aggregator_1",
+            "location": [1715, 2227],
+            "display_name": "Aggregator",
+            "extract": 1,
+            "type": "aggregator",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "parameters_2",
+            "location": [1824, 2228],
+            "display_name": "Output Parameters",
+            "type": "outputparameters"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "iterator_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster2"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["input_raster1"],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster1"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_rasters"],
+            "to_node": "iterator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["input_raster"],
+            "to_node": "task_2",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_raster"],
+            "to_node": "aggregator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "aggregator_1",
+            "from_parameters": ["output"],
+            "to_node": "parameters_2",
+            "to_parameters": [""]
+        }
+    ]
+}

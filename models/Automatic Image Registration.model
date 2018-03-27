@@ -1,0 +1,113 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "name": "raster_1",
+            "location": [1274, 1601],
+            "display_name": "Base image",
+            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\image_registration\\QuickBirdPhoenixWest.dat"],
+            "type": "rasterfile"
+        },
+        {
+            "name": "raster_2",
+            "location": [1275, 1516],
+            "display_name": "Warp image",
+            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\image_registration\\QuickBirdPhoenixEast.dat"],
+            "type": "rasterfile"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "requested_number_of_tiepoints": 50
+                },
+                "revision": "1.0.0",
+                "name": "GenerateTiePointsByCrossCorrelation"
+            },
+            "name": "task_1",
+            "location": [1448, 1560],
+            "display_name": "Generate Tie Points by Cross Correlation",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "FilterTiePointsByGlobalTransform",
+                "revision": "1.0.0"
+            },
+            "name": "task_2",
+            "location": [1610, 1560],
+            "display_name": "Filter Tie Point by Global Transform",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "warping": "Triangulation"
+                },
+                "revision": "1.0.0",
+                "name": "ImageToImageRegistration"
+            },
+            "name": "task_3",
+            "location": [1769, 1560],
+            "display_name": "Image to Image Registration",
+            "type": "task"
+        },
+        {
+            "name": "dataManager_1",
+            "location": [1921, 1596],
+            "display_name": "Data Manager",
+            "type": "datamanager",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "view_1",
+            "location": [1922, 1524],
+            "display_name": "View",
+            "type": "view",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "comment_1",
+            "location": [1616, 1478],
+            "display_name": "This model runs through an image-to-image registration workflow, using QuickBird imagery.",
+            "type": "comment"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster1"]
+        },
+        {
+            "from_node": "raster_2",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster2"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_tiepoints"],
+            "to_node": "task_2",
+            "to_parameters": ["input_tiepoints"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_tiepoints"],
+            "to_node": "task_3",
+            "to_parameters": ["input_tiepoints"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "dataManager_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        }
+    ]
+}

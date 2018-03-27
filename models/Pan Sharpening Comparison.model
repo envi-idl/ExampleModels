@@ -1,0 +1,131 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "envitask": {
+                "name": "NNDiffusePanSharpening",
+                "revision": "Unknown"
+            },
+            "name": "task_1",
+            "location": [1463, 1582],
+            "display_name": "NNDiffuse Pan Sharpening",
+            "type": "task"
+        },
+        {
+            "name": "raster_1",
+            "location": [1248, 1558],
+            "display_name": "qb_boulder_pan",
+            "type": "enviraster",
+            "datasets": {
+                "url": "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_pan",
+                "factory": "URLRaster",
+                "auxiliary_url": [
+                    "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_pan.hdr",
+                    "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_pan.enp"
+                ]
+            }
+        },
+        {
+            "name": "raster_2",
+            "location": [1248, 1456],
+            "display_name": "qb_boulder_msi",
+            "type": "enviraster",
+            "datasets": {
+                "url": "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_msi",
+                "factory": "URLRaster",
+                "auxiliary_url": [
+                    "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_msi.hdr",
+                    "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_msi.enp"
+                ]
+            }
+        },
+        {
+            "name": "view_1",
+            "location": [1628, 1498],
+            "display_name": "View",
+            "type": "view"
+        },
+        {
+            "envitask": {
+                "name": "GramSchmidtPanSharpening",
+                "revision": "Unknown"
+            },
+            "name": "task_2",
+            "location": [1463, 1414],
+            "display_name": "Gram-Schmidt Pan Sharpening",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "PCPanSharpening",
+                "revision": "Unknown"
+            },
+            "name": "task_3",
+            "location": [1463, 1498],
+            "display_name": "Principal Components Pan Sharpening",
+            "type": "task"
+        },
+        {
+            "name": "comment_1",
+            "location": [1182, 1310],
+            "display_name": "A comparison of pan-sharpening algorithms in ENVI.",
+            "type": "comment"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "raster_2",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_low_resolution_raster"]
+        },
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "task_1",
+            "to_parameters": ["input_high_resolution_raster"]
+        },
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "task_3",
+            "to_parameters": ["input_high_resolution_raster"]
+        },
+        {
+            "from_node": "raster_2",
+            "from_parameters": [""],
+            "to_node": "task_2",
+            "to_parameters": ["input_low_resolution_raster"]
+        },
+        {
+            "from_node": "raster_2",
+            "from_parameters": [""],
+            "to_node": "task_3",
+            "to_parameters": ["input_low_resolution_raster"]
+        },
+        {
+            "from_node": "raster_1",
+            "from_parameters": [""],
+            "to_node": "task_2",
+            "to_parameters": ["input_high_resolution_raster"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        }
+    ]
+}
