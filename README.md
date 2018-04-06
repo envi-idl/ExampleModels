@@ -51,4 +51,4 @@ Here is a list and short description of the included models:
 
 Licensed under MIT. See LICENSE.txt for additional details and information.
 
-Copyright (c) 2017, Harris Geospatial Solutions, Inc.
+Copyright (c) 2018, Harris Geospatial Solutions, Inc.
