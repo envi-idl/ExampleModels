@@ -4,13 +4,9 @@
         {
             "name": "rasterSeries_1",
             "location": [1553, 1634],
-            "display_name": "landsat_subset.series",
+            "display_name": "Input Rasterseries",
             "type": "envirasterseries",
             "datasets": [
-                {
-                    "url": "\\\\fridge.rsinc.com\\envi_data\\time_series\\landsat_subset\\landsat_subset.series",
-                    "factory": "URLRasterSeries"
-                }
             ]
         },
         {

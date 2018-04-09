@@ -4,8 +4,8 @@
         {
             "name": "raster_1",
             "location": [1385, 1521],
-            "display_name": "cup95eff.int",
-            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\envi_data_dir\\cup95eff.int"],
+            "display_name": "Hyperspectral Raster",
+            "uris": [],
             "type": "rasterfile"
         },
         {
@@ -22,7 +22,7 @@
             "name": "spectrallib_1",
             "location": [1386, 1292],
             "display_name": "usgs_min.sli",
-            "uris": ["\\\\fridge.rsinc.com\\envi_data\\data_dvd\\spec_lib\\usgs_min\\usgs_min.sli"],
+            "uris": [""],
             "type": "spectrallibraryfile"
         },
         {

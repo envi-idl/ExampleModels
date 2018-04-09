@@ -5,14 +5,14 @@
             "name": "raster_1",
             "location": [1335, 1555],
             "display_name": "Low Res. Rasters",
-            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_msi", "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_msi"],
+            "uris": [],
             "type": "rasterfile"
         },
         {
             "name": "raster_2",
             "location": [1336, 1435],
             "display_name": "High Res. Rasters",
-            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_pan", "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_pan"],
+            "uris": [],
             "type": "rasterfile"
         },
         {

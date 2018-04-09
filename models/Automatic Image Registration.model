@@ -5,14 +5,14 @@
             "name": "raster_1",
             "location": [1274, 1601],
             "display_name": "Base image",
-            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\image_registration\\QuickBirdPhoenixWest.dat"],
+            "uris": ["],
             "type": "rasterfile"
         },
         {
             "name": "raster_2",
             "location": [1275, 1516],
             "display_name": "Warp image",
-            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\image_registration\\QuickBirdPhoenixEast.dat"],
+            "uris": [""],
             "type": "rasterfile"
         },
         {

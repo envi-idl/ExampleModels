@@ -153,15 +153,15 @@
         {
             "name": "raster_1",
             "location": [1059, 1743],
-            "display_name": "qb_boulder_msi",
-            "uris": ["C:\\Program Files\\Harris\\ENVI55\\data\\qb_boulder_msi"],
+            "display_name": "Input Raster",
+            "uris": [],
             "type": "rasterfile"
         },
         {
             "name": "roi_1",
             "location": [1068, 1639],
-            "display_name": "qb_boulder_roi.xml",
-            "uris": ["C:\\Program Files\\Harris\\ENVI55\\data\\qb_boulder_roi.xml"],
+            "display_name": "Input ROIs",
+            "uris": [],
             "type": "roifile"
         },
         {

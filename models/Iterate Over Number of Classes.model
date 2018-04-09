@@ -14,8 +14,8 @@
         {
             "name": "raster_1",
             "location": [1339, 2365],
-            "display_name": "qb_boulder_msi",
-            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_msi"],
+            "display_name": "Input Raster",
+            "uris": [],
             "type": "rasterfile"
         },
         {

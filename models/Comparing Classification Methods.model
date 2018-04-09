@@ -3,80 +3,79 @@
     "nodes": [
         {
             "name": "roi_1",
-            "location": [1353, 1928],
+            "location": [1389, 1930],
             "display_name": "3 ROIs",
-            "uris": ["\\\\fridge.rsinc.com\\RSI_HOME\\eduardo\\Modeler\\Examples\\rois_ortho_VNIR2957.xml"],
+            "uris": [],
             "type": "roifile"
         },
         {
             "name": "raster_1",
-            "location": [1353, 1840],
+            "location": [1389, 1842],
             "display_name": "orthoVNIR2957",
             "type": "enviraster",
             "datasets": {
-                "url": "\\\\fridge.rsinc.com\\envi_data\\HaitiFullCampaign\\Imagery\\VNIROrthoScaled\\orthoVNIR2957_flatfield.tif",
-                "factory": "URLRaster"
             }
         },
         {
             "envitask": {
                 "name": "ROIStatistics",
-                "revision": "Unknown"
+                "revision": "1.0.0"
             },
             "name": "task_1",
-            "location": [1522, 1879],
+            "location": [1558, 1881],
             "display_name": "ROI Training Classification Statistics",
             "type": "task"
         },
         {
             "envitask": {
                 "name": "MahalanobisDistanceClassification",
-                "revision": "Unknown"
+                "revision": "1.0.0"
             },
             "name": "task_2",
-            "location": [1727, 1835],
+            "location": [1763, 1837],
             "display_name": "Mahalanobis Distance Classification",
             "type": "task"
         },
         {
             "name": "view_1",
-            "location": [1892, 1715],
+            "location": [1928, 1717],
             "display_name": "View",
-            "type": "view"
+            "type": "view",
+            "revision": "1.0.0"
         },
         {
             "name": "comment_1",
-            "location": [1407, 1648],
+            "location": [1443, 1650],
             "display_name": "Comparing different classification methods in ENVI.",
             "type": "comment"
         },
         {
             "envitask": {
                 "name": "MaximumLikelihoodClassification",
-                "revision": "Unknown"
+                "revision": "1.0.0"
             },
             "name": "task_3",
-            "location": [1727, 1583],
+            "location": [1763, 1585],
             "display_name": "Maximum Likelihood Classification",
             "type": "task"
         },
         {
             "envitask": {
                 "name": "SpectralAngleMapperClassification",
-                "revision": "Unknown"
+                "revision": "1.0.0"
             },
             "name": "task_4",
-            "location": [1727, 1667],
+            "location": [1763, 1669],
             "display_name": "Spectral Angle Mapper Classification",
             "type": "task"
         },
         {
             "envitask": {
                 "name": "MinimumDistanceClassification",
-                "revision": "Unknown"
+                "revision": "1.0.0"
             },
             "name": "task_5",
-            "location": [1727, 1751],
+            "location": [1763, 1753],
             "display_name": "Minimum Distance Classification",
             "type": "task"
         }

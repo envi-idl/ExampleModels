@@ -14,29 +14,17 @@
         {
             "name": "raster_1",
             "location": [1248, 1558],
-            "display_name": "qb_boulder_pan",
+            "display_name": "Panchromatic Raster",
             "type": "enviraster",
             "datasets": {
-                "url": "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_pan",
-                "factory": "URLRaster",
-                "auxiliary_url": [
-                    "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_pan.hdr",
-                    "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_pan.enp"
-                ]
             }
         },
         {
             "name": "raster_2",
             "location": [1248, 1456],
-            "display_name": "qb_boulder_msi",
+            "display_name": "Multispectral Raster",
             "type": "enviraster",
             "datasets": {
-                "url": "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_msi",
-                "factory": "URLRaster",
-                "auxiliary_url": [
-                    "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_msi.hdr",
-                    "\\\\fridge.rsinc.com\\envi_data\\qa\\standard_data\\qb_boulder_msi.enp"
-                ]
             }
         },
         {

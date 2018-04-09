@@ -5,14 +5,14 @@
             "name": "raster_1",
             "location": [1380, 1634],
             "display_name": "AVIRIS hyperspectral image",
-            "uris": ["\\\\fridge.rsinc.com\\envi_data\\aviris\\bakersfield_ca_reflectance\\AVIRISAgricultureScaledReflectance.dat"],
+            "uris": [],
             "type": "rasterfile"
         },
         {
             "name": "spectrallib_1",
             "location": [1380, 1518],
             "display_name": "veg_2grn.sli",
-            "uris": ["\\\\fridge.rsinc.com\\envi_data\\data_dvd\\spec_lib\\veg_lib\\veg_2grn.sli"],
+            "uris": [],
             "type": "spectrallibraryfile"
         },
         {

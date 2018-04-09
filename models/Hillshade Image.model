@@ -10,8 +10,8 @@
         {
             "name": "raster_1",
             "location": [1130, 1830],
-            "display_name": "lanai_dem1.tif",
-            "uris": ["\\\\fridge.rsinc.com\\envi_data\\qa\\sfe\\Hawaii_Landcover_46\\lanai\\lanai_dem1.tif"],
+            "display_name": "DEM",
+            "uris": [""],
             "type": "rasterfile"
         },
         {
