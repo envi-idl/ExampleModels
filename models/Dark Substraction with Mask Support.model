@@ -1,0 +1,175 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "envitask": {
+                "name": "DarkSubtractionCorrection",
+                "revision": "1.0.0"
+            },
+            "name": "task_1",
+            "location": [1776, 1510],
+            "display_name": "Dark Subtraction Correction",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "RasterStatistics",
+                "revision": "1.0.0"
+            },
+            "name": "task_2",
+            "location": [1557, 1573],
+            "display_name": "Raster Statistics",
+            "type": "task"
+        },
+        {
+            "name": "parameters_1",
+            "location": [1298, 1510],
+            "display_name": "Input Parameters",
+            "type": "inputparameters",
+            "parameters": [
+                {
+                    "name": "INPUT_RASTER",
+                    "type": "ENVIRASTER",
+                    "display_name": "Input Raster"
+                },
+                {
+                    "name": "DATA_IGNORE_VALUE",
+                    "type": "DOUBLE",
+                    "display_name": "Data Ignore Value"
+                }
+            ]
+        },
+        {
+            "name": "parameters_2",
+            "location": [2107, 1384],
+            "display_name": "Output Parameters",
+            "type": "outputparameters"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "data_ignore_value": 0.00000000000000000,
+                    "inverse": false
+                },
+                "revision": "1.1.0",
+                "name": "MaskRaster"
+            },
+            "name": "task_3",
+            "location": [1952, 1460],
+            "display_name": "Mask Raster by Raster",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "ExtractBandsFromRaster",
+                "revision": "1.0.0"
+            },
+            "name": "task_4",
+            "location": [1501, 1420],
+            "display_name": "Extract Bands from Raster",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "indices": [0]
+                },
+                "revision": "1.0.0",
+                "name": "ExtractElementFromArray"
+            },
+            "name": "elementExtractor_1",
+            "location": [1683, 1419],
+            "display_name": "Extract Elements from Array",
+            "type": "arrayextractor",
+            "indices": [0]
+        },
+        {
+            "name": "comment_1",
+            "location": [1789, 1682],
+            "display_name": "This is an example of how to use the Modeler to provide Mask Support for a task that does not have internal support for masking. It's a workaround that works well at the expense of additional steps.",
+            "type": "comment"
+        },
+        {
+            "name": "dataManager_1",
+            "location": [2108, 1459],
+            "display_name": "Data Manager",
+            "type": "datamanager",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "view_1",
+            "location": [2111, 1529],
+            "display_name": "View",
+            "type": "view",
+            "revision": "1.0.0"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "task_2",
+            "from_parameters": ["min"],
+            "to_node": "task_1",
+            "to_parameters": ["values"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["input_raster"],
+            "to_node": "task_2",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["input_raster"],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_3",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["input_raster"],
+            "to_node": "task_4",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_4",
+            "from_parameters": ["output_rasters"],
+            "to_node": "elementExtractor_1",
+            "to_parameters": ["input_array"]
+        },
+        {
+            "from_node": "elementExtractor_1",
+            "from_parameters": ["output_element"],
+            "to_node": "task_3",
+            "to_parameters": ["input_mask_raster"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "parameters_2",
+            "to_parameters": ["output_raster"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["data_ignore_value"],
+            "to_node": "task_3",
+            "to_parameters": ["data_ignore_value"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "dataManager_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        }
+    ]
+}

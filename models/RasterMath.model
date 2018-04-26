@@ -1,0 +1,143 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "envitask": {
+                "name": "ExtractBandsFromRaster",
+                "revision": "1.0.0"
+            },
+            "name": "task_1",
+            "location": [1126, 1670],
+            "display_name": "Extract Bands from Raster",
+            "type": "task"
+        },
+        {
+            "name": "iterator_1",
+            "location": [1271, 1670],
+            "display_name": "Iterator",
+            "type": "iterator",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "aggregator_1",
+            "location": [1542, 1608],
+            "display_name": "Aggregator",
+            "extract": 1,
+            "type": "aggregator",
+            "revision": "1.0.0"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "output_raster_uri": "*"
+                },
+                "revision": "1.1.0",
+                "name": "PixelwiseBandMathRaster"
+            },
+            "name": "task_2",
+            "location": [1404, 1551],
+            "display_name": "Band Math",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "BuildBandStack",
+                "revision": "1.1.0"
+            },
+            "name": "task_3",
+            "location": [1680, 1665],
+            "display_name": "Build Band Stack",
+            "type": "task"
+        },
+        {
+            "name": "parameters_1",
+            "location": [963, 1594],
+            "display_name": "Input Parameters",
+            "type": "inputparameters",
+            "parameters": [
+                {
+                    "name": "INPUT_RASTER",
+                    "type": "ENVIRASTER",
+                    "display_name": "Input Raster"
+                },
+                {
+                    "name": "EXPRESSION",
+                    "type": "STRING",
+                    "display_name": "Expression"
+                },
+                {
+                    "name": "DATA_IGNORE_VALUE",
+                    "type": "DOUBLE",
+                    "display_name": "Data Ignore Value"
+                },
+                {
+                    "name": "OUTPUT_RASTER_URI",
+                    "type": "ENVIVIRTUALIZABLEURI",
+                    "display_name": "Output Raster URI"
+                }
+            ]
+        },
+        {
+            "name": "parameters_2",
+            "location": [1821, 1664],
+            "display_name": "Output Parameters",
+            "type": "outputparameters"
+        },
+        {
+            "name": "comment_1",
+            "location": [1417, 1783],
+            "display_name": "Applies the same band math expression to all the bands in a raster (e.g. b1 * 20 + 10). Must use B1 as variable name in the expression.",
+            "type": "comment"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_rasters"],
+            "to_node": "iterator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "iterator_1",
+            "from_parameters": [""],
+            "to_node": "task_2",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_raster"],
+            "to_node": "aggregator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "aggregator_1",
+            "from_parameters": ["output"],
+            "to_node": "task_3",
+            "to_parameters": ["input_rasters"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["input_raster"],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["expression", "data_ignore_value"],
+            "to_node": "task_2",
+            "to_parameters": ["expression", "data_ignore_value"]
+        },
+        {
+            "from_node": "parameters_1",
+            "from_parameters": ["output_raster_uri"],
+            "to_node": "task_3",
+            "to_parameters": ["output_raster_uri"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "parameters_2",
+            "to_parameters": ["output_raster"]
+        }
+    ]
+}

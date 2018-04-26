@@ -18,6 +18,8 @@ Here is a list and short description of the included models:
 
 - **Comparing Classification Methods**: Nice model that compares four different classification methods on a single raster and ENVI ROI. 
 
+- **Dark Subtraction with Mask Support**: Example model that performs dark subtraction on a raster and supports masked pixels.
+
 - **Find Minerals**: Example that demonstrates how to map minerals in a hyperspectral image using ENVI's hyperspectral tools. Alunite and Kaolinite are mapped in this example. 
 
 - **Generate Contour Lines**: This simple example generates contour lines on a raster using ISODATAClassification and is an example of how you can use algorithms in ENVI for different applications.
@@ -35,6 +37,8 @@ Here is a list and short description of the included models:
 - **Pan Sharpening Comparison**: Compares the different PanSharpening algorithms available in ENVI
 
 - **Pan Sharpening Iterator**: Shows how to use one Iterator node to process two arrays of rasters to perform NNDiffusePanSharpening on all rasters.
+
+- **Raster Math**: This tasks applies a single bandmath expression to exery band of a raster. The band math expression should only contain the band identifier **b1** which will represent each band as the model loops through the raster.
 
 - **Raster Stacking**: Demonstrates how to stack an array of rasters if they have overlap.
 
