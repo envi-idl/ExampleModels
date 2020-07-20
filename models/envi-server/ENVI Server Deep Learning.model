@@ -1,0 +1,367 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "envitask": {
+                "static_input": {
+                    "output_class_activation_raster_uri": "!"
+                },
+                "revision": "2.0.0",
+                "name": "TensorFlowMaskClassification"
+            },
+            "name": "task_1",
+            "location": [1960, 1222],
+            "display_name": "Classify Raster with TensorFlow Mask Model",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "patches_per_epoch": 150,
+                    "epochs": 12,
+                    "blur_distance": [0.00000000000000000, 0.00000000000000000],
+                    "class_weight": [1.0000000000000000, 3.0000000000000000],
+                    "patch_sampling_rate": 8.0000000,
+                    "loss_weight": 0.00000000000000000
+                },
+                "revision": "1.1.0",
+                "name": "TrainTensorFlowMaskModel"
+            },
+            "name": "task_2",
+            "location": [1879, 1595],
+            "display_name": "Train TensorFlow Mask Model",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "indices": [0]
+                },
+                "revision": "1.0.0",
+                "name": "ExtractElementFromArray"
+            },
+            "name": "elementExtractor_1",
+            "location": [1641, 1473],
+            "display_name": "Extract Elements from Array",
+            "type": "arrayextractor",
+            "indices": [0]
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "indices": [0]
+                },
+                "revision": "1.0.0",
+                "name": "ExtractElementFromArray"
+            },
+            "name": "elementExtractor_2",
+            "location": [1638, 1546],
+            "display_name": "Extract Elements from Array",
+            "type": "arrayextractor",
+            "indices": [0]
+        },
+        {
+            "name": "comment_1",
+            "location": [1636, 1610],
+            "display_name": "Extract training rasters",
+            "type": "comment"
+        },
+        {
+            "name": "comment_2",
+            "location": [1638, 1410],
+            "display_name": "Extract validation rasters",
+            "type": "comment"
+        },
+        {
+            "name": "iterator_1",
+            "location": [1508, 1221],
+            "display_name": "Iterator",
+            "type": "iterator",
+            "revision": "1.0.0"
+        },
+        {
+            "envitask": {
+                "name": "ExtractRasterFromFile",
+                "revision": "1.0.0"
+            },
+            "name": "task_3",
+            "location": [1642, 1221],
+            "display_name": "Extract Raster from File",
+            "type": "task"
+        },
+        {
+            "name": "comment_3",
+            "location": [1508, 1314],
+            "display_name": "Classify our validation rasters to visualize the classifier performance",
+            "type": "comment"
+        },
+        {
+            "name": "comment_4",
+            "location": [1333, 1707],
+            "display_name": "Open our rasters as label rasters",
+            "type": "comment"
+        },
+        {
+            "name": "comment_5",
+            "location": [1881, 1664],
+            "display_name": "Train the model. TO DO: update the parameters for your training session",
+            "type": "comment"
+        },
+        {
+            "name": "uri_1",
+            "location": [1040, 1587],
+            "display_name": "0 files",
+            "uris": null,
+            "type": "stringfile"
+        },
+        {
+            "name": "iterator_2",
+            "location": [1203, 1636],
+            "display_name": "Iterator",
+            "type": "iterator",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "aggregator_1",
+            "location": [1480, 1636],
+            "display_name": "Aggregator",
+            "extract": 1,
+            "type": "aggregator",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "comment_6",
+            "location": [859, 1599],
+            "display_name": "Deep Learning Label Raster filepaths. These rasters should be byte and have an extra band for the Label Mask",
+            "type": "comment"
+        },
+        {
+            "name": "values_1",
+            "location": [1047, 1402],
+            "display_name": "4 values: 0, 1, 2, 3",
+            "value": [0, 1, 2, 3],
+            "type": "arrayvalues",
+            "data_type": "Long Integer"
+        },
+        {
+            "name": "values_2",
+            "location": [1045, 1307],
+            "display_name": "1 values: 4",
+            "value": [4],
+            "type": "arrayvalues",
+            "data_type": "Long Integer"
+        },
+        {
+            "name": "comment_7",
+            "location": [862, 1402],
+            "display_name": "Array indices for training (zero based) where the indices represent the element of the raster filepaths above",
+            "type": "comment"
+        },
+        {
+            "name": "comment_8",
+            "location": [864, 1294],
+            "display_name": "Array indices for validation (zero based) where the indices represent the element of the raster filepaths above",
+            "type": "comment"
+        },
+        {
+            "name": "comment_9",
+            "location": [1708, 1780],
+            "display_name": "Create our model. TO DO: specify the number of classes",
+            "type": "comment"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "indices": [0]
+                },
+                "revision": "1.0.0",
+                "name": "ExtractElementFromArray"
+            },
+            "name": "elementExtractor_3",
+            "location": [1375, 1220],
+            "display_name": "Extract Elements from Array",
+            "type": "arrayextractor",
+            "indices": [0]
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "nclasses": 1,
+                    "nbands": 3
+                },
+                "revision": "1.0.0",
+                "name": "InitializeENVINet5MultiModel"
+            },
+            "name": "task_4",
+            "location": [1704, 1711],
+            "display_name": "Initialize ENVINet5 Multiclass Model",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "bands": [0, 1, 2, 3],
+                    "output_raster_uri": "*"
+                },
+                "revision": "1.1.0",
+                "name": "SubsetRaster"
+            },
+            "name": "task_5",
+            "location": [1798, 1222],
+            "display_name": "Subset Raster",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "name": "ExtractDeepLearningLabelRasterFromFile",
+                "revision": "1.0.0"
+            },
+            "name": "task_6",
+            "location": [1337, 1636],
+            "display_name": "Extract Deep Learning Label Raster from File",
+            "type": "task"
+        },
+        {
+            "name": "aggregator_2",
+            "location": [2084, 1222],
+            "display_name": "Aggregator",
+            "extract": 1,
+            "type": "aggregator",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "parameters_1",
+            "location": [2137, 1435],
+            "display_name": "Output Parameters",
+            "type": "outputparameters"
+        },
+        {
+            "name": "comment_10",
+            "location": [2134, 1541],
+            "display_name": "In the output parameters capture our best and last models from training, along with all of the validation classification results",
+            "type": "comment"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_model"],
+            "to_node": "task_1",
+            "to_parameters": ["input_model"]
+        },
+        {
+            "from_node": "iterator_1",
+            "from_parameters": [""],
+            "to_node": "task_3",
+            "to_parameters": ["input_uri"]
+        },
+        {
+            "from_node": "uri_1",
+            "from_parameters": [""],
+            "to_node": "iterator_2",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "values_1",
+            "from_parameters": [""],
+            "to_node": "elementExtractor_2",
+            "to_parameters": ["indices"]
+        },
+        {
+            "from_node": "values_2",
+            "from_parameters": [""],
+            "to_node": "elementExtractor_1",
+            "to_parameters": ["indices"]
+        },
+        {
+            "from_node": "aggregator_1",
+            "from_parameters": ["output"],
+            "to_node": "elementExtractor_2",
+            "to_parameters": ["input_array"]
+        },
+        {
+            "from_node": "elementExtractor_2",
+            "from_parameters": ["output_element"],
+            "to_node": "task_2",
+            "to_parameters": ["training_rasters"]
+        },
+        {
+            "from_node": "aggregator_1",
+            "from_parameters": ["output"],
+            "to_node": "elementExtractor_1",
+            "to_parameters": ["input_array"]
+        },
+        {
+            "from_node": "elementExtractor_1",
+            "from_parameters": ["output_element"],
+            "to_node": "task_2",
+            "to_parameters": ["validation_rasters"]
+        },
+        {
+            "from_node": "uri_1",
+            "from_parameters": [""],
+            "to_node": "elementExtractor_3",
+            "to_parameters": ["input_array"]
+        },
+        {
+            "from_node": "values_2",
+            "from_parameters": [""],
+            "to_node": "elementExtractor_3",
+            "to_parameters": ["indices"]
+        },
+        {
+            "from_node": "elementExtractor_3",
+            "from_parameters": ["output_element"],
+            "to_node": "iterator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "task_4",
+            "from_parameters": ["output_model"],
+            "to_node": "task_2",
+            "to_parameters": ["input_model"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_5",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_5",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "iterator_2",
+            "from_parameters": [""],
+            "to_node": "task_6",
+            "to_parameters": ["input_uri"]
+        },
+        {
+            "from_node": "task_6",
+            "from_parameters": ["output_raster"],
+            "to_node": "aggregator_1",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "task_1",
+            "from_parameters": ["output_classification_raster"],
+            "to_node": "aggregator_2",
+            "to_parameters": [""]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_model", "output_last_model"],
+            "to_node": "parameters_1",
+            "to_parameters": ["", ""]
+        },
+        {
+            "from_node": "aggregator_2",
+            "from_parameters": ["output"],
+            "to_node": "parameters_1",
+            "to_parameters": [""]
+        }
+    ]
+}

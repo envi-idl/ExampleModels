@@ -6,7 +6,7 @@ Note that you will not be able to run every model that is included because you w
 
 ## Requirements
 
-In order to run these models, you will need **ENVI 5.5** or newer.
+In order to run these models, you will need **ENVI 5.5** or newer. 
 
 ## Models
 
@@ -50,6 +50,20 @@ Here is a list and short description of the included models:
 
 - **SVM Classification Framework**: An example showing how to use the SVM classification algorithm in ENVI with the new classification framework.
 
+
+### ENVI Server Models
+
+**You need at least ENVI 5.6 in order to use ENVI Server and the examples in this folder.**
+
+There are two example models to show how you can work with ENVI Server from the ENVI Modeler. These files can all be found in the **models/envi-server** subdirectory.
+
+The only difference for these models and the other examples is that we have to use the Output Parameters node in the ENVI Modeler to capture anything that we want ENVI to have access to and save.
+
+Here is a short summary of the ENVI Modeler workflows for ENVI Server:
+
+- **ENVI Server Deep Learning**: This model requires you have **ENVI Deep Learning 1.1 installed**. This demonstrates to do do programmatic training using an array of files on disk with the ENVI Modeler. To use, update the green nodes on the left specifying your ENVI Deep Learning Label Rasters and which ones are for training or validation. You should also adjust the training parameters and the number of classes in the model initalizer node. There are comments with **TO DO** in them to call out where you should change parameters.
+
+- **ENVI Server Subset and Spectral Index**: Use Input Parameters and Output Parameters with workflows you want to run on ENVI Server. You can still use the View and Data Manager nodes with ENVI Server which can help when you are trying to debug ENVI Modeler workflows in your ENVI Desktop session.
 
 ## License
 

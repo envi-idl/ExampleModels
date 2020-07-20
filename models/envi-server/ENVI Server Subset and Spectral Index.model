@@ -1,0 +1,161 @@
+{
+    "schema": "envimodel_1.0",
+    "nodes": [
+        {
+            "name": "parameters_1",
+            "location": [1847, 1549],
+            "display_name": "Output Parameters",
+            "type": "outputparameters"
+        },
+        {
+            "envitask": {
+                "name": "CreateSubrectsFromROI",
+                "revision": "1.0.1"
+            },
+            "name": "task_1",
+            "location": [1219, 1683],
+            "display_name": "Create Subrects from ROI",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "output_raster_uri": "*"
+                },
+                "revision": "1.1.0",
+                "name": "SubsetRaster"
+            },
+            "name": "task_2",
+            "location": [1456, 1682],
+            "display_name": "Subset Raster",
+            "type": "task"
+        },
+        {
+            "envitask": {
+                "static_input": {
+                    "index": ["NDVI"]
+                },
+                "revision": "1.1.0",
+                "name": "SpectralIndices"
+            },
+            "name": "task_3",
+            "location": [1664, 1548],
+            "display_name": "Spectral Indices",
+            "type": "task"
+        },
+        {
+            "name": "comment_1",
+            "location": [1338, 1766],
+            "display_name": "Subset our raster for faster processing",
+            "type": "comment"
+        },
+        {
+            "name": "comment_2",
+            "location": [1694, 1664],
+            "display_name": "Make sure that we DO NOT select virtual raster as our output file. Double check after connecting nodes before running.",
+            "type": "comment"
+        },
+        {
+            "name": "view_1",
+            "location": [1848, 1427],
+            "display_name": "View",
+            "type": "view",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "dataManager_1",
+            "location": [1850, 1357],
+            "display_name": "Data Manager",
+            "type": "datamanager",
+            "revision": "1.0.0"
+        },
+        {
+            "name": "parameters_2",
+            "location": [1100, 1550],
+            "display_name": "Input Parameters",
+            "type": "inputparameters",
+            "parameters": [
+                {
+                    "name": "INPUT_RASTER",
+                    "type": "ENVIRASTER",
+                    "display_name": "Input Raster",
+                    "description": "Specify the raster to subset."
+                },
+                {
+                    "name": "INPUT_ROI",
+                    "type": "ENVIROIARRAY",
+                    "display_name": "Input ROIs",
+                    "description": "Specify an ROI or array of ROIs that define the areas for the subrects."
+                },
+                {
+                    "name": "INDEX",
+                    "type": "STRINGARRAY",
+                    "display_name": "Index",
+                    "description": "Specify an array of strings representing the pre-defined spectral indices to apply to the input raster."
+                }
+            ]
+        },
+        {
+            "name": "comment_3",
+            "location": [950, 1556],
+            "display_name": "Use input parameters to specify our raster and a subset to process.",
+            "type": "comment"
+        },
+        {
+            "name": "comment_4",
+            "location": [1986, 1394],
+            "display_name": "No need to worry about View or Data Manager nodes when working with ENVI Server, you can leave them in so that your workflows function how you want them to in ENVI Desktop",
+            "type": "comment"
+        }
+    ],
+    "edges": [
+        {
+            "from_node": "task_1",
+            "from_parameters": ["subrects"],
+            "to_node": "task_2",
+            "to_parameters": ["sub_rect"]
+        },
+        {
+            "from_node": "task_2",
+            "from_parameters": ["output_raster"],
+            "to_node": "task_3",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "parameters_1",
+            "to_parameters": ["output_raster"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "view_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "task_3",
+            "from_parameters": ["output_raster"],
+            "to_node": "dataManager_1",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "parameters_2",
+            "from_parameters": ["input_raster"],
+            "to_node": "task_2",
+            "to_parameters": ["input_raster"]
+        },
+        {
+            "from_node": "parameters_2",
+            "from_parameters": ["input_raster", "input_roi"],
+            "to_node": "task_1",
+            "to_parameters": ["input_raster", "input_roi"]
+        },
+        {
+            "from_node": "parameters_2",
+            "from_parameters": ["index"],
+            "to_node": "task_3",
+            "to_parameters": ["index"]
+        }
+    ]
+}
